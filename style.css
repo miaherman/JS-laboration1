@@ -6,7 +6,7 @@ html, body {
     width: 100%;
     margin: 0;
     font-family: fantasy;
-    background-image: url(/images/forest.jpg) ;
+    background-image: url(./images/forest.jpg) ;
     background-size: cover;
     color: #fcfcfcd7;
 }
