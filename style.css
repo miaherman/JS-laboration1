@@ -1,5 +1,7 @@
 html, body {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -9,14 +11,13 @@ html, body {
     
 }
 
-.main-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container {
     text-align: center;
     background-color: #ddd9d931;
-    width: 100%;
+    width: 40rem;
+    padding: 4rem;
+    border-radius: 1rem;
+    
 }
 
 
@@ -24,4 +25,17 @@ h1 {
     margin: 0;
     font-size: 3rem;
     color: #e6dfdfbd;
+}
+
+.btn-order {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    background-color: #ffffff9f;
+    border-radius: 1rem 1rem;
+    padding: 1rem 3rem;
+    border: 0rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
