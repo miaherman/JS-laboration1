@@ -11,10 +11,35 @@ function startGame() {
 function showTextNode(textNodeIndex) {
     const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
+    while (btnChoicesElement.firstChild) {
+        btnChoicesElement.removeChild(btnChoicesElement.firstChild)
+
+    }
+
+
+textNode.options.forEach(option => {
+    if (showOption(option)) {
+        const button = document.createElement('button')
+        button.innerText = option.text
+        button.classList.add('btn')
+        button.addEventListener('click', () => selectOption(option))
+        btnChoicesElement.appendChild(button)
+    }
+})
+}
+
+
+function showOption(option) {
+    return option.requiredState == null || option.requiredState(state)
 }
 
 function selectOption(option) {
-
+    let nextTextNodeId = option.nextText
+    if (nextTextNodeId <= 0) {
+        return startGame() 
+    }
+    state = Object.assign(state, option.setState)
+    showTextNode(nextTextNodeId)
 }
 
 const textNodes = [
@@ -24,17 +49,71 @@ const textNodes = [
         options: [
             {
                 text: 'I scream',
-                setState: { blackSwoord: true },
+                setState: { boat: true },
                 nextText: 2
             },
             {
                 text: 'Fish and ships',
-                nextText: 2
+                nextText: 3
+            }
+        ]
+    },
+
+    {
+        id: 2,
+        text: 'The ghouls deem your answer incorrect, but you get to pass anyway. Also you get a boat for being funny. But next up you are faced by a silvery lake, reflecting back on you like a mirror. How do you get across?',
+        options: [
+            {
+                text: 'I will use the boat I got from the ghouls!',
+                requiredState: (currentState) => currentState.boat,
+                setState: { boat: false, },
+                nextText: 4
+            },
+            {
+                text: 'I will swim acrosss the lake!',
+                nextText: 4
+            },
+        ]
+    },
+
+    {
+        id: 3,
+        text: 'You are correct and may pass. But next up you are faced by a silvery lake, reflecting back on you like a mirror. How do you get across?',
+        options: [
+            {
+                text: 'I will swim acrosss the lake!',
+                nextText: 4
+            },
+        ]
+    },
+
+    {
+        id: 4,
+        text:'While making your way across the lake - the mirror shatters and 12 angry and very energetic personal trainers appear from underneath you and try to force meal plans, dumb bells and HIIT-exercises on you. You are starting to realise that you are very close to hell. What do you do?',
+        options: [
+            {
+                text: 'You take a look at one of their meal plans and find yourself lured in by their fitness regimes',
+                nextText: 5
+            },
+            {
+                text: 'You lift up a dumbbell and start swinging',
+                nextText: 6
+            },
+            {
+                text: 'You find a boquet of kale in your pocket and throw it away to try and distract them, much like throwing a bone to a dog',
+                nextText: 6
             }
         ]
     },
     {
-        id:2
+        id: 6,
+        text: 'Well fought. You have made your way over to the other side of the lake. But the PTs have tricked you into signing up to a never ending class of burpees and crossfit. Tough luck, welcome to hell.',
+        options: [
+            {
+                text: "Game over, restart the game.",
+                nextText: -1
+            }
+        ]
     }
 ]
 
