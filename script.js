@@ -1,4 +1,4 @@
-const textelement = document.getElementById('text')
+const textElement = document.getElementById('text')
 const btnChoicesElement = document.getElementById('btn-choices')
 
 let state= {}
@@ -28,7 +28,7 @@ const textNodes = [
                 nextText: 2
             },
             {
-                text: 'I scream',
+                text: 'Fish and ships',
                 nextText: 2
             }
         ]
