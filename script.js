@@ -3,6 +3,8 @@ const btnChoicesElement = document.getElementById('btn-choices')
 
 let state= {}
 
+// Functions - buttons and text
+
 function startGame() {
     state = {}
     showTextNode(1)
@@ -16,7 +18,6 @@ function showTextNode(textNodeIndex) {
 
     }
 
-
 textNode.options.forEach(option => {
     if (showOption(option)) {
         const button = document.createElement('button')
@@ -28,10 +29,11 @@ textNode.options.forEach(option => {
 })
 }
 
-
 function showOption(option) {
     return option.requiredState == null || option.requiredState(state)
 }
+
+// Options
 
 function selectOption(option) {
     let nextTextNodeId = option.nextText
@@ -41,6 +43,8 @@ function selectOption(option) {
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
+
+// Story and options
 
 const textNodes = [
     {
@@ -93,15 +97,25 @@ const textNodes = [
         options: [
             {
                 text: 'You take a look at one of their meal plans and find yourself lured in by their fitness regimes',
-                nextText: 5
+                nextText: 6
             },
             {
                 text: 'You lift up a dumbbell and start swinging',
-                nextText: 6
+                nextText: 5
             },
             {
                 text: 'You find a boquet of kale in your pocket and throw it away to try and distract them, much like throwing a bone to a dog',
                 nextText: 6
+            }
+        ]
+    },
+    {
+        id: 5,
+        text: 'Well fought. You managed to scare them off, especially when you told them you can only do one push up. But you are starting to realise that this aint a place for you. You just want to get out. All of a sudden - Big Shaq appears. He says he knows a way out, but that you have to help him with some quick maths. 2+2 is?',
+
+        options: [
+            {
+                
             }
         ]
     },
