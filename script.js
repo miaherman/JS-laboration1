@@ -1,6 +1,5 @@
 const textElement = document.getElementById('text')
 const btnChoicesElement = document.getElementById('btn-choices')
-
 let state= {}
 
 // Functions - buttons and text
@@ -29,11 +28,16 @@ textNode.options.forEach(option => {
 })
 }
 
+inputForm.style.display = 'block'; 
+
+
+
+// Certain option is visible if you have required the gift from the ghouls
 function showOption(option) {
     return option.requiredState == null || option.requiredState(state)
 }
 
-// Options
+// Options and restarting game
 
 function selectOption(option) {
     let nextTextNodeId = option.nextText
@@ -44,7 +48,10 @@ function selectOption(option) {
     showTextNode(nextTextNodeId)
 }
 
-// Story and options
+
+
+
+// Story and choices for player
 
 const textNodes = [
     {
@@ -112,12 +119,6 @@ const textNodes = [
     {
         id: 5,
         text: 'Well fought. You managed to scare them off, especially when you told them you can only do one push up. But you are starting to realise that this aint a place for you. You just want to get out. All of a sudden - Big Shaq appears. He says he knows a way out, but that you have to help him with some quick maths. 2+2 is?',
-
-        options: [
-            {
-                
-            }
-        ]
     },
     {
         id: 6,
