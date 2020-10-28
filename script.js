@@ -1,5 +1,6 @@
-const textElement = document.getElementById('text')
-const btnChoicesElement = document.getElementById('btn-choices')
+let textElement = document.getElementById('text')
+let btnChoicesElement = document.getElementById('btn-choices')
+
 let state= {}
 
 // Functions - buttons and text
@@ -9,8 +10,9 @@ function startGame() {
     showTextNode(1)
 }
 
+
 function showTextNode(textNodeIndex) {
-    const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+    let textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
     while (btnChoicesElement.firstChild) {
         btnChoicesElement.removeChild(btnChoicesElement.firstChild)
@@ -19,7 +21,7 @@ function showTextNode(textNodeIndex) {
 
 textNode.options.forEach(option => {
     if (showOption(option)) {
-        const button = document.createElement('button')
+        let button = document.createElement('button')
         button.innerText = option.text
         button.classList.add('btn')
         button.addEventListener('click', () => selectOption(option))
@@ -27,9 +29,6 @@ textNode.options.forEach(option => {
     }
 })
 }
-
-inputForm.style.display = 'block'; 
-
 
 
 // Certain option is visible if you have required the gift from the ghouls
@@ -48,12 +47,14 @@ function selectOption(option) {
     showTextNode(nextTextNodeId)
 }
 
-
+function getInputValue() {
+    document.getElementById("myInput").value = "Johnny Bravo";
+  }
 
 
 // Story and choices for player
 
-const textNodes = [
+let textNodes = [
     {
         id: 1,
         text: 'Welcome to the other realm, in order to enter safely you have to answer a question as old as time. Proceed with caution and beware of the entities you may encounter along the way. The enteties may grant you a special gift, if you manage to please them. The riddle is as follows: What do sea monsters eat?',
@@ -105,6 +106,7 @@ const textNodes = [
             {
                 text: 'You take a look at one of their meal plans and find yourself lured in by their fitness regimes',
                 nextText: 6
+                
             },
             {
                 text: 'You lift up a dumbbell and start swinging',
