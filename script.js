@@ -1,58 +1,93 @@
 let textElement = document.getElementById('text')
 let btnChoicesElement = document.getElementById('btn-choices')
 
-let state= {}
-
-// Functions - buttons and text
+function restartGame() {
+    location.reload();
+}
 
 function startGame() {
     state = {}
     showTextNode(1)
 }
 
-
 function showTextNode(textNodeIndex) {
     let textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
+    
     while (btnChoicesElement.firstChild) {
         btnChoicesElement.removeChild(btnChoicesElement.firstChild)
-
+    }
+    
+    if (textNode.options) {
+        textNode.options.forEach(option => {
+            if (showOption(option)) {
+                let button = document.createElement('button')
+                button.innerText = option.text
+                button.classList.add('btn')
+                button.addEventListener('click', () => selectOption(option))
+                btnChoicesElement.appendChild(button)
+            } 
+        })
     }
 
-textNode.options.forEach(option => {
-    if (showOption(option)) {
-        let button = document.createElement('button')
-        button.innerText = option.text
-        button.classList.add('btn')
-        button.addEventListener('click', () => selectOption(option))
-        btnChoicesElement.appendChild(button)
-    }
-})
+    let inputForm = document.getElementById('inputForm')
+        if (textNode.input) {
+            inputForm.style.display = "block";
+        } else {
+            inputForm.style.display = "none";
+        }
 }
 
+function getInputValue(){
+    // Selecting the input element and get its value 
+    let inputVal = document.getElementById("myInput").value;
+        if (inputVal == '4') {
+            let textElement = document.getElementById('text')
+            textElement.innerText = 'hello';
+            inputForm.style.display = 'none';
+            let restartButton = document.createElement('button')
+            restartButton.classList.add('btn')
+            restartButton.innerText = 'Restart game'
+            restartButton.addEventListener('click', restartGame)
+            btnChoicesElement.appendChild(restartButton)
+        }
+        else if (inputVal => 1000) {
+            let textElement = document.getElementById('text')
+            textElement.innerText = 'hello';
+            inputForm.style.display = 'none';
+        }
+
+    // Displaying the value
+}
+
+/** 
+function userInput() {
+    let userValue = document.getInputValue('myInput').value;
+        if (userValue == 4) {
+            alert('you are wrong m8, try again');
+        }
+        else if (userValue == 5) {
+            alert('you are wrong m8, try again');
+        }
+    
+}*/
 
 // Certain option is visible if you have required the gift from the ghouls
 function showOption(option) {
     return option.requiredState == null || option.requiredState(state)
 }
 
-// Options and restarting game
 
 function selectOption(option) {
     let nextTextNodeId = option.nextText
-    if (nextTextNodeId <= 0) {
-        return startGame() 
-    }
-    state = Object.assign(state, option.setState)
-    showTextNode(nextTextNodeId)
+        if (nextTextNodeId <= 0) {
+            return startGame() 
+        }
+
+        state = Object.assign(state, option.setState)
+        showTextNode(nextTextNodeId)
 }
-
-function getInputValue() {
-    document.getElementById("myInput").value = "Johnny Bravo";
-  }
-
-
-// Story and choices for player
+/** Story and choices for player */
 
 let textNodes = [
     {
@@ -68,7 +103,7 @@ let textNodes = [
                 text: 'Fish and ships',
                 nextText: 3
             }
-        ]
+        ],
     },
 
     {
@@ -121,6 +156,7 @@ let textNodes = [
     {
         id: 5,
         text: 'Well fought. You managed to scare them off, especially when you told them you can only do one push up. But you are starting to realise that this aint a place for you. You just want to get out. All of a sudden - Big Shaq appears. He says he knows a way out, but that you have to help him with some quick maths. 2+2 is?',
+        input: true
     },
     {
         id: 6,
@@ -131,7 +167,8 @@ let textNodes = [
                 nextText: -1
             }
         ]
-    }
+    },
+    
 ]
 
 startGame()
