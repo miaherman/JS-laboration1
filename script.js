@@ -54,27 +54,27 @@ function showTextNode(textNodeIndex) {
 /** Shows a form for id:5, processes its value and creates a restart button */
 function getInputValue(){
     let inputVal = document.getElementById("myInput").value;
-        if (inputVal == 4) {
-            let textElement = document.getElementById('text')
-            textElement.innerText = 'Right on bruv. Big Shaq has showed you the way out of hell. Click the button below to replay the game.';
-            inputForm.style.display = 'none';
-            let restartButton = document.createElement('button')
-            restartButton.classList.add('btn')
-            restartButton.innerText = 'Restart game'
-            restartButton.addEventListener('click', restartGame)
-            btnChoicesElement.appendChild(restartButton)
-        }
+            if (inputVal == 4) {
+                let textElement = document.getElementById('text')
+                textElement.innerText = 'Right on bruv. Big Shaq has showed you the way out of hell. Click the button below to replay the game.';
+                inputForm.style.display = 'none';
+                let restartButton = document.createElement('button')
+                restartButton.classList.add('btn')
+                restartButton.innerText = 'Restart game'
+                restartButton.addEventListener('click', restartGame)
+                btnChoicesElement.appendChild(restartButton)
+            }
 
-        else {
-            let textElement = document.getElementById('text')
-            textElement.innerText = 'That aint it m8. Back to the ghouls you go.';
-            inputForm.style.display = 'none';
-            let restartButton = document.createElement('button')
-            restartButton.classList.add('btn')
-            restartButton.innerText = 'Restart game'
-            restartButton.addEventListener('click', restartGame)
-            btnChoicesElement.appendChild(restartButton)
-        }
+            else {
+                let textElement = document.getElementById('text')
+                textElement.innerText = 'That aint it m8. Back to the ghouls you go.';
+                inputForm.style.display = 'none';
+                let restartButton = document.createElement('button')
+                restartButton.classList.add('btn')
+                restartButton.innerText = 'Restart game'
+                restartButton.addEventListener('click', restartGame)
+                btnChoicesElement.appendChild(restartButton)
+            }
 }
 
 /** Shows a form for id:8, processes its value and creates a restart button */
@@ -82,7 +82,7 @@ function dateInputValue() {
     let inputWord = document.getElementById("dateInput").value;
         if (inputWord === 'brå') {
             let textElement = document.getElementById('text')
-            textElement.innerText = 'Your date is intrigued but bored. He lets you go and you manage to escape and awkard declaration of love. Congrats! You made it out.',
+            textElement.innerText = 'Your date is intrigued but bored. He lets you go and you manage to escape an awkard declaration of love. Congrats! You made it out.',
             dateForm.style.display = 'none';
             let restartButton = document.createElement('button')
             restartButton.classList.add('btn')
