@@ -1,10 +1,12 @@
 let textElement = document.getElementById('text')
 let btnChoicesElement = document.getElementById('btn-choices')
 
+/** Restarts game */
 function restartGame() {
     location.reload();
 }
 
+/** Shows first id(scene) at the start of the game */
 function startGame() {
     state = {}
     showTextNode(1)
@@ -30,20 +32,28 @@ function showTextNode(textNodeIndex) {
         })
     }
 
+/* States if input form should be visible for player when selecting options */
     let inputForm = document.getElementById('inputForm')
-        if (textNode.input) {
-            inputForm.style.display = "block";
-        } else {
-            inputForm.style.display = "none";
-        }
-}
+            if (textNode.input) {
+                inputForm.style.display = "block";
+            } else {
+                inputForm.style.display = "none";
+            }
 
+    let dateForm = document.getElementById('dateForm')
+            if(textNode.dateinput) {
+                dateForm.style.display = "block";
+            } else {
+                dateForm.style.display = "none";
+            } 
+    }
+
+/** Shows a form for id:5, processes its value and creates a restart button */
 function getInputValue(){
-    // Selecting the input element and get its value 
     let inputVal = document.getElementById("myInput").value;
-        if (inputVal == '4') {
+        if (inputVal == 4) {
             let textElement = document.getElementById('text')
-            textElement.innerText = 'hello';
+            textElement.innerText = 'Right on bruv. Big Shaq has showed you the way out of hell. Click the button below to replay the game.';
             inputForm.style.display = 'none';
             let restartButton = document.createElement('button')
             restartButton.classList.add('btn')
@@ -51,32 +61,62 @@ function getInputValue(){
             restartButton.addEventListener('click', restartGame)
             btnChoicesElement.appendChild(restartButton)
         }
-        else if (inputVal => 1000) {
+
+        else {
             let textElement = document.getElementById('text')
-            textElement.innerText = 'hello';
+            textElement.innerText = 'That aint it m8. Back to the ghouls you go.';
             inputForm.style.display = 'none';
+            let restartButton = document.createElement('button')
+            restartButton.classList.add('btn')
+            restartButton.innerText = 'Restart game'
+            restartButton.addEventListener('click', restartGame)
+            btnChoicesElement.appendChild(restartButton)
+        }
+}
+
+/** Shows a form for id:8, processes its value and creates a restart button */
+function dateInputValue() {
+    let inputWord = document.getElementById("dateInput").value;
+        if (inputWord === 'brå') {
+            let textElement = document.getElementById('text')
+            textElement.innerText = 'Your date is intrigued but bored. He lets you go and you manage to escape and awkard declaration of love. Congrats! You made it out.',
+            dateForm.style.display = 'none';
+            let restartButton = document.createElement('button')
+            restartButton.classList.add('btn')
+            restartButton.innerText = 'Restart game'
+            restartButton.addEventListener('click', restartGame)
+            btnChoicesElement.appendChild(restartButton)
         }
 
+        else if (inputWord === 'sygytt') {
+            let textElement = document.getElementById('text')
+            textElement.innerText = 'Your date is delighted you speak the same love language! He starts declaring his love for you and unfortunately you will be stuck in this loop until forever. Tough luck. Game over.',
+            dateForm.style.display = 'none';
+            let restartButton = document.createElement('button')
+            restartButton.classList.add('btn')
+            restartButton.innerText = 'Restart game'
+            restartButton.addEventListener('click', restartGame)
+            btnChoicesElement.appendChild(restartButton)
+        }
+
+        else {
+            let textElement = document.getElementById('text')
+            textElement.innerText = 'Your date does not approve, but is intrigued. Which means you will be stuck here forever in this awkward date. Welcome to hell. Give it another go and see if you can make it out.',
+            dateForm.style.display = 'none';
+            let restartButton = document.createElement('button')
+            restartButton.classList.add('btn')
+            restartButton.innerText = 'Restart game'
+            restartButton.addEventListener('click', restartGame)
+            btnChoicesElement.appendChild(restartButton)
+        }
+        
     // Displaying the value
 }
 
-/** 
-function userInput() {
-    let userValue = document.getInputValue('myInput').value;
-        if (userValue == 4) {
-            alert('you are wrong m8, try again');
-        }
-        else if (userValue == 5) {
-            alert('you are wrong m8, try again');
-        }
-    
-}*/
-
-// Certain option is visible if you have required the gift from the ghouls
+/** Certain option is visible if you have required the gift from the ghouls */
 function showOption(option) {
     return option.requiredState == null || option.requiredState(state)
 }
-
 
 function selectOption(option) {
     let nextTextNodeId = option.nextText
@@ -87,8 +127,8 @@ function selectOption(option) {
         state = Object.assign(state, option.setState)
         showTextNode(nextTextNodeId)
 }
-/** Story and choices for player */
 
+/** Sets story and choices for player */
 let textNodes = [
     {
         id: 1,
@@ -140,7 +180,7 @@ let textNodes = [
         options: [
             {
                 text: 'You take a look at one of their meal plans and find yourself lured in by their fitness regimes',
-                nextText: 6
+                nextText: 7
                 
             },
             {
@@ -160,15 +200,36 @@ let textNodes = [
     },
     {
         id: 6,
-        text: 'Well fought. You have made your way over to the other side of the lake. But the PTs have tricked you into signing up to a never ending class of burpees and crossfit. Tough luck, welcome to hell.',
+        text: 'You managed to outsmart them! They went after the kale like hungry lions. I guess they do not have kale in hell. You have made your way over to the other side of the lake. But the PTs have tricked you into signing up to a never ending class of burpees and crossfit. Tough luck, welcome to hell. Now you are faced with the difficult choice of deciding what kind of protein shake you have to gulp down. Quick! Pick one, or the PTs will punish you with an extra round of mountain climbers',
         options: [
             {
-                text: "Game over, restart the game.",
-                nextText: -1
+                text: "A green eewy gooey celery juice packed with all the things influencers blog about",
+                nextText: 8
+            },
+            {
+                text:'A shimmery concoction that is oozing with things that are good for your body. You are disgusted.',
+                nextText: 8
             }
         ]
     },
-    
+
+    {
+        id: 7,
+        text: 'Congratulations, you are now stuck with a meal plan that substitutes all your meals with celery juice and you will forever have a PT yelling at you while you are forced to alternate between crossfit and HIIT.',
+        options: [
+            {
+                text: 'Game over my friend, welcome to hell.',
+                nextText: -1
+            }
+
+        ]
+    },
+    {
+        id: 8,
+        text: 'You are forced to drink this juice and now you have advanced in the levels of Hell. You find yourself on the TV-show - Hemliga Beundrare. Your date greets you with a TJÄNAAAH! And follows up with a Lägyt? What do you reply? (brå/sygytt)',
+        dateinput: true
+    }
+
 ]
 
 startGame()
