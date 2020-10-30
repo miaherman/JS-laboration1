@@ -1,6 +1,7 @@
 /** Describes task or gives information to player */
 let textElement = document.getElementById('text')
 
+/** Shows number of buttons for player */
 let btnChoicesElement = document.getElementById('btn-choices')
 
 /** Restarts game */
@@ -14,7 +15,7 @@ function startGame() {
     showTextNode(1)
 }
 
-/** Adds buttons for different scenarios based on textnodes used */
+/** Adds buttons/actions for different scenarios based on textnodes used */
 function showTextNode(textNodeIndex) {
     let textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
@@ -22,7 +23,7 @@ function showTextNode(textNodeIndex) {
     while (btnChoicesElement.firstChild) {
         btnChoicesElement.removeChild(btnChoicesElement.firstChild)
     }
-    
+    //Creates button for ID if stated
     if (textNode.options) {
         textNode.options.forEach(option => {
             if (showOption(option)) {
@@ -34,15 +35,13 @@ function showTextNode(textNodeIndex) {
             } 
         })
     }
-
-/** States if input form should be visible for player when selecting options */
+     // Collects HTMLform and hides/shows it depending on statement in ID
     let inputForm = document.getElementById('inputForm')
             if (textNode.input) {
                 inputForm.style.display = "block";
             } else {
                 inputForm.style.display = "none";
             }
-
     let dateForm = document.getElementById('dateForm')
             if(textNode.dateinput) {
                 dateForm.style.display = "block";
@@ -51,8 +50,9 @@ function showTextNode(textNodeIndex) {
             } 
     }
 
-/** Shows a form for id:5, processes its value and creates a restart button */
+/** Calculates inputform for id:5, processes its value and presents choices depending on value */
 function getInputValue(){
+    //Presents button and text if player is correct
     let inputVal = document.getElementById("myInput").value;
             if (inputVal == 4) {
                 let textElement = document.getElementById('text')
@@ -64,7 +64,7 @@ function getInputValue(){
                 restartButton.addEventListener('click', restartGame)
                 btnChoicesElement.appendChild(restartButton)
             }
-
+    //Presents button and text if player is incorrect
             else {
                 let textElement = document.getElementById('text')
                 textElement.innerText = 'That aint it m8. Back to the ghouls you go.';
@@ -77,10 +77,11 @@ function getInputValue(){
             }
 }
 
-/** Shows a form for id:8, processes its value and creates a restart button */
+/** Calculates inputform for id:8, processes its value and presents choices depending on value */
 function dateInputValue() {
+    //Creates button and presents text if player is correct
     let inputWord = document.getElementById("dateInput").value;
-        if (inputWord === 'brå') {
+        if (inputWord.toLowerCase === 'brå') {
             let textElement = document.getElementById('text')
             textElement.innerText = 'Your date is intrigued but bored. He lets you go and you manage to escape an awkard declaration of love. Congrats! You made it out.',
             dateForm.style.display = 'none';
@@ -90,7 +91,7 @@ function dateInputValue() {
             restartButton.addEventListener('click', restartGame)
             btnChoicesElement.appendChild(restartButton)
         }
-
+    //Creates button and presents text if player is incorrect
         else if (inputWord === 'sygytt') {
             let textElement = document.getElementById('text')
             textElement.innerText = 'Your date is delighted you speak the same love language! He starts declaring his love for you and unfortunately you will be stuck in this loop until forever. Tough luck. Game over.',
@@ -103,6 +104,7 @@ function dateInputValue() {
         }
 
         else {
+    //Creates button and presents text if player is incorrect
             let textElement = document.getElementById('text')
             textElement.innerText = 'Incorrect. Your date does not approve, but is intrigued. Which means you will be stuck here forever in this awkward date. Welcome to hell. Give it another go and see if you can make it out.',
             dateForm.style.display = 'none';
@@ -114,11 +116,12 @@ function dateInputValue() {
         }
 }
 
-/** Certain option is visible if you have required the gift from the ghouls */
+/** Presents certain option if you have required the gift from the ghouls */
 function showOption(option) {
     return option.requiredState == null || option.requiredState(state)
 }
 
+/** If the next step in the story is set to less than 0, the game is restarted */
 function selectOption(option) {
     let nextTextNodeId = option.nextText
         if (nextTextNodeId <= 0) {
