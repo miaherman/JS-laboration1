@@ -1,4 +1,6 @@
+/** Describes task or gives information to player */
 let textElement = document.getElementById('text')
+
 let btnChoicesElement = document.getElementById('btn-choices')
 
 /** Restarts game */
@@ -12,6 +14,7 @@ function startGame() {
     showTextNode(1)
 }
 
+/** Adds buttons for different scenarios based on textnodes used */
 function showTextNode(textNodeIndex) {
     let textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
@@ -32,7 +35,7 @@ function showTextNode(textNodeIndex) {
         })
     }
 
-/* States if input form should be visible for player when selecting options */
+/** States if input form should be visible for player when selecting options */
     let inputForm = document.getElementById('inputForm')
             if (textNode.input) {
                 inputForm.style.display = "block";
@@ -101,7 +104,7 @@ function dateInputValue() {
 
         else {
             let textElement = document.getElementById('text')
-            textElement.innerText = 'Your date does not approve, but is intrigued. Which means you will be stuck here forever in this awkward date. Welcome to hell. Give it another go and see if you can make it out.',
+            textElement.innerText = 'Incorrect. Your date does not approve, but is intrigued. Which means you will be stuck here forever in this awkward date. Welcome to hell. Give it another go and see if you can make it out.',
             dateForm.style.display = 'none';
             let restartButton = document.createElement('button')
             restartButton.classList.add('btn')
@@ -109,8 +112,6 @@ function dateInputValue() {
             restartButton.addEventListener('click', restartGame)
             btnChoicesElement.appendChild(restartButton)
         }
-        
-    // Displaying the value
 }
 
 /** Certain option is visible if you have required the gift from the ghouls */
